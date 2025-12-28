@@ -13,7 +13,7 @@ export const tabItems: TabItemsTypes[] = [
     isActive: true,
   },
   {
-    name: "ReadingList",
+    name: "Saved",
     icon: BookmarkIcon,
     isActive: false,
   },
