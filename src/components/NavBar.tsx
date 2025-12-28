@@ -8,12 +8,12 @@ import { useTheme } from "../theme/theme-context";
 export default function NavBar() {
     const { theme, setTheme } = useTheme();
   return (
-    <nav className="p-4 flex justify-between items-center">
+    <nav className="p-4 flex justify-between items-center h-[10%]">
       <img src="/logo.svg" alt="Blog Logo" className="w-8 h-8" />
 
       <div className="relative hidden sm:block">
         <SearchIcon className="absolute translate-y-1/4 left-2" />
-        <Input className="pl-10" type="search" placeholder="Search..." />
+        <Input className="pl-10" type="search" placeholder="Search..." name="search" />
       </div>
 
       <div className="text-accent-foreground flex gap-4 items-center">

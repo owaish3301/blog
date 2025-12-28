@@ -11,7 +11,7 @@ export default function App() {
       <Separator />
 
       {/* the main body part */}
-      <div className="absolute bottom-0 w-full">
+      <div className="w-full h-[90%]">
         <BottomTabs />
         <SideBars />
       </div>
