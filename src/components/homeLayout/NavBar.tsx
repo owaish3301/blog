@@ -8,7 +8,7 @@ export default function NavBar() {
     const { theme, setTheme } = useTheme();
   return (
     <nav className="p-4 flex justify-between items-center text-accent-foreground ">
-      <Button variant="ghost">
+      <Button variant="ghost" aria-label="Home">
         <img src="/logo.svg" alt="Blog Logo" className="w-8 h-8" />
       </Button>
 
