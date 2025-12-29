@@ -1,13 +1,16 @@
+import { ScrollArea } from "../../components/ui/scroll-area";
 import { tabItems } from "../../Constants/tabs"
+import TrendingNow from "../homePageContent/TrendingNow";
+import WhoToFollow from "../homePageContent/WhoToFollow";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator"
 
-export default function SideBars () {
+export default function MainBody () {
   return (
     <div className="hidden sm:flex h-full w-full">
-      <div className="w-max h-full">
+      <aside className="h-full">
         {/* left sidebar */}
-        <ul className="flex flex-col gap-2 p-4">
+        <ul className="flex flex-col gap-2 px-4 py-6">
           {tabItems.map((item) => (
             <li key={item.name}>
               <div
@@ -20,18 +23,21 @@ export default function SideBars () {
             </li>
           ))}
         </ul>
-      </div>
+      </aside>
 
       <Separator orientation="vertical" />
 
-      <div></div>
+      <main className="w-full"></main>
 
       <Separator orientation="vertical" />
 
-      <div className="w-1/5 h-full hidden lg:block">
+      <aside className="w-max h-full hidden md:block px-4 py-6">
         {/* right sidebar */}
-        
-      </div>
+        <ScrollArea className="h-full">
+          <TrendingNow />
+          <WhoToFollow />
+        </ScrollArea>
+      </aside>
     </div>
   );
 }
