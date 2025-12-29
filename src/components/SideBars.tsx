@@ -1,10 +1,11 @@
 import { tabItems } from "../Constants/tabs"
+import { Button } from "./ui/button";
 import { Separator } from "./ui/separator"
 
 export default function SideBars () {
   return (
-    <div className="hidden sm:flex h-full">
-      <div className="w-1/5 h-full">
+    <div className="hidden sm:flex h-full w-full">
+      <div className="w-max h-full">
         {/* left sidebar */}
         <ul className="flex flex-col gap-2 p-4">
           {tabItems.map((item) => (
@@ -14,7 +15,7 @@ export default function SideBars () {
                   item.isActive ? "bg-accent" : ""
                 }`}
               >
-                <item.icon /> {item.name}{" "}
+                <Button variant="ghost" className="w-full"> <item.icon /> {item.name} </Button>
               </div>
             </li>
           ))}
@@ -27,7 +28,10 @@ export default function SideBars () {
 
       <Separator orientation="vertical" />
 
-      <div className="w-1/5 h-full hidden lg:block">{/* right sidebar */}</div>
+      <div className="w-1/5 h-full hidden lg:block">
+        {/* right sidebar */}
+        
+      </div>
     </div>
   );
 }

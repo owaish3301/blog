@@ -1,11 +1,7 @@
-import type { LucideProps } from "lucide-react";
-import type { ForwardRefExoticComponent, RefAttributes } from "react";
-
+import type { LucideIcon } from "lucide-react";
 
 export interface TabItemsTypes {
   name: string;
-  icon: ForwardRefExoticComponent<
-    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
-  >;
+  icon: LucideIcon;
   isActive?: boolean;
 }
