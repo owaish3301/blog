@@ -1,6 +1,13 @@
 import { tabItems } from "../../Constants/tabs";
 import { Button } from "../ui/button";
 
+/**
+ * Renders a horizontal bottom tab bar based on the configured `tabItems`.
+ *
+ * Each tab is rendered as a list item containing a full-width ghost `Button` with the tab's icon.
+ *
+ * @returns The unordered list element containing one tab item per entry in `tabItems`. Active tabs have an accented background.
+ */
 export default function BottomTabs() {
   return (
       <ul className="flex text-accent-foreground px-4 pt-1 pb-2">

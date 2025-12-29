@@ -5,6 +5,13 @@ import WhoToFollow from "../homePageContent/WhoToFollow";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator"
 
+/**
+ * Renders the main three-column layout: a left tab navigation, a center content placeholder, and a right widgets column.
+ *
+ * The left column lists `tabItems` as full-width ghost Buttons and applies an accent background to the active tab. The center area is an empty content container. The right column is scrollable, contains `TrendingNow` and `WhoToFollow`, and is visible on medium screens and larger.
+ *
+ * @returns The JSX element representing the responsive main body layout.
+ */
 export default function MainBody () {
   return (
     <div className="hidden sm:flex h-full w-full">

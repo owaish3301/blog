@@ -4,6 +4,13 @@ import { Input } from "../ui/input";
 import { useTheme } from "../../theme/theme-context";
 import { Button } from "../ui/button";
 
+/**
+ * Top navigation bar with logo, a responsive search field, theme toggle, notifications, and user actions.
+ *
+ * The theme toggle switches between "dark" and "light" using the theme context. The search input is hidden on small screens.
+ *
+ * @returns A React element representing the navigation bar.
+ */
 export default function NavBar() {
     const { theme, setTheme } = useTheme();
   return (

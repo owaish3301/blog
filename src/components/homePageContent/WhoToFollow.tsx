@@ -7,6 +7,14 @@ import {
 import { Button } from "../ui/button";
 import followSuggestion from "./whoToFollowMockData";
 import { UserIcon } from "lucide-react";
+/**
+ * Render a "Who to follow" card that lists suggested users.
+ *
+ * The card displays each suggested user's avatar (or a fallback icon when no image is available),
+ * the user's name, and a "Follow" button.
+ *
+ * @returns A React element containing the card with the list of suggested users
+ */
 export default function WhoToFollow() {
   return (
     <Card className="gap-2">
