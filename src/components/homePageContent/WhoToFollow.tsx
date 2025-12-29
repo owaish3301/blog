@@ -26,7 +26,7 @@ export default function WhoToFollow() {
                 ) : (
                   <img
                     src={item.imgLink}
-                    alt="profile pic"
+                    alt={`${item.name}'s profile picture`}
                     className="h-8 w-8"
                   />
                 )}
