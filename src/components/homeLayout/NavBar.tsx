@@ -1,8 +1,8 @@
 import { BellIcon, MoonIcon, SearchIcon, SunIcon, User } from "lucide-react";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 
-import { useTheme } from "../theme/theme-context";
-import { Button } from "./ui/button";
+import { useTheme } from "../../theme/theme-context";
+import { Button } from "../ui/button";
 
 export default function NavBar() {
     const { theme, setTheme } = useTheme();

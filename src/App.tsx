@@ -1,7 +1,7 @@
 import { Separator } from "./components/ui/separator";
-import NavBar from "./components/NavBar";
-import BottomTabs from "./components/BottomTabs";
-import SideBars from "./components/SideBars";
+import NavBar from "./components/homeLayout/NavBar";
+import BottomTabs from "./components/homeLayout/BottomTabs";
+import SideBars from "./components/homeLayout/SideBars";
 
 export default function App() {
   return (

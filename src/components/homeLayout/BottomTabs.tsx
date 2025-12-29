@@ -1,6 +1,6 @@
-import { Separator } from "./ui/separator";
-import { tabItems } from "../Constants/tabs";
-import { Button } from "./ui/button";
+import { Separator } from "../ui/separator";
+import { tabItems } from "../../Constants/tabs";
+import { Button } from "../ui/button";
 
 export default function BottomTabs() {
   return (
