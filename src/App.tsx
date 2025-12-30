@@ -12,7 +12,7 @@ export default function App() {
 
       {/* the main body part */}
       <div className="relative flex-1 min-h-0 w-full">
-        <div className="block sm:hidden absolute bottom-0 w-full">
+        <div className="block sm:hidden fixed bottom-0 w-full z-10 bg-background">
           <Separator />
           <BottomTabs />
         </div>

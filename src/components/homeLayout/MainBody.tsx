@@ -7,8 +7,8 @@ import { Separator } from "../ui/separator"
 
 export default function MainBody () {
   return (
-    <div className="hidden sm:flex h-full w-full">
-      <aside className="h-full">
+    <div className="sm:flex h-full w-full">
+      <aside className="hidden sm:flex h-full">
         {/* left sidebar */}
         <ul className="flex flex-col gap-2 px-4 py-6">
           {tabItems.map((item) => (
@@ -18,16 +18,21 @@ export default function MainBody () {
                   item.isActive ? "bg-accent" : ""
                 }`}
               >
-                <Button variant="ghost" className="w-full"> <item.icon /> {item.name} </Button>
+                <Button variant="ghost" className="w-full">
+                  <item.icon /> {item.name}
+                </Button>
               </div>
             </li>
           ))}
         </ul>
+        <Separator orientation="vertical" />
       </aside>
 
-      <Separator orientation="vertical" />
-
-      <main className="w-full"></main>
+      <main className="h-full w-full px-4 py-2 overflow-y-auto">
+        <div className="md:hidden pb-[100px]">
+          <WhoToFollow />
+        </div>
+      </main>
 
       <Separator orientation="vertical" />
 

@@ -2,6 +2,7 @@ import {
   BookmarkIcon,
   HomeIcon,
   SearchIcon,
+  TrendingUpIcon,
 } from "lucide-react";
 
 import type { TabItemsTypes } from "./tabsType";
@@ -13,13 +14,18 @@ export const tabItems: TabItemsTypes[] = [
     isActive: true,
   },
   {
-    name: "Saved",
-    icon: BookmarkIcon,
+    name: "Trending",
+    icon: TrendingUpIcon,
     isActive: false,
   },
   {
     name: "Search",
     icon: SearchIcon,
+    isActive: false,
+  },
+  {
+    name: "Saved",
+    icon: BookmarkIcon,
     isActive: false,
   },
 ];
