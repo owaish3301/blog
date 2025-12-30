@@ -28,12 +28,10 @@ export default function MainBody () {
         <Separator orientation="vertical" />
       </aside>
 
-      <main className="h-full w-full px-4 py-2">
-        <ScrollArea className="h-full">
-          <div className="md:hidden pb-[100px]">
-            <WhoToFollow />
-          </div>
-        </ScrollArea>
+      <main className="h-full w-full px-4 py-2 overflow-y-auto">
+        <div className="md:hidden pb-[100px]">
+          <WhoToFollow />
+        </div>
       </main>
 
       <Separator orientation="vertical" />
