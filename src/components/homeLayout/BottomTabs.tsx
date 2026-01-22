@@ -9,7 +9,7 @@ export default function BottomTabs() {
             key={item.name}
             className={`px-3 py-2 rounded-lg grow ${
               item.isActive ? "bg-accent" : ""
-            }`}
+            } ${item.isDesktopOnly?"hidden" :""}`}
           >
             <Button variant="ghost" className="w-full">
               <item.icon className="m-auto" />

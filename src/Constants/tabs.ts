@@ -2,6 +2,7 @@ import {
   BookmarkIcon,
   HomeIcon,
   SearchIcon,
+  SendIcon,
   TrendingUpIcon,
 } from "lucide-react";
 
@@ -27,5 +28,12 @@ export const tabItems: TabItemsTypes[] = [
     name: "Saved",
     icon: BookmarkIcon,
     isActive: false,
+  },
+  {
+    name: "Post",
+    icon: SendIcon,
+    isActive: false,
+    customStyle: `bg-slate-600 dark:bg-sky-50 rounded-full`,
+    isDesktopOnly: true,
   },
 ];

@@ -27,7 +27,7 @@ export default function WhoToFollow() {
       <CardHeader>
         <CardTitle>Who to follow</CardTitle>
       </CardHeader>
-      <CardContent className="p-0 md:p-6">
+      <CardContent className="">
         {/* Mobile: Horizontal scroll */}
         <div className="md:hidden overflow-x-auto scrollbar-hide">
           <ul className="flex gap-3 px-4 pb-4 w-max">
