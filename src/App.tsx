@@ -1,25 +1,18 @@
-import { Separator } from "./components/ui/separator";
-import NavBar from "./components/homeLayout/NavBar";
-import BottomTabs from "./components/homeLayout/BottomTabs";
-import MainBody from "./components/homeLayout/MainBody";
+import { Route, Routes } from "react-router";
+import Home from "./pages/Home";
+import Auth from "./pages/Auth";
+import SignIn from "./components/authPages/SignIn";
+import SignUp from "./components/authPages/SignUp";
+
 
 export default function App() {
   return (
-    <div className="h-screen w-screen flex flex-col overflow-hidden">
-      {/* top part */}
-      <NavBar />
-      <Separator />
-
-      {/* the main body part */}
-      <div className="relative flex-1 min-h-0 w-full">
-        <div className="block sm:hidden fixed bottom-0 w-full z-10 bg-background">
-          <Separator />
-          <BottomTabs />
-        </div>
-
-        <MainBody />
-        
-      </div>
-    </div>
+    <Routes>
+      <Route path="/home" element={<Home />}></Route>
+      <Route element={<Auth />}>
+        <Route path="/signin" element={<SignIn />}></Route>
+        <Route path="/signup" element={<SignUp />}></Route>
+      </Route>
+    </Routes>
   );
 }
