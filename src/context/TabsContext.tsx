@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+/* eslint-disable react-refresh/only-export-components */
+
+import { createContext, useContext, useState } from "react";
 import { tabItems } from "../Constants/tabs";
 import type { TabItemsTypes } from "../Constants/tabsType";
 
@@ -19,4 +21,11 @@ const TabsProvider = ({ children} : {children : React.ReactNode } ) => {
     return (<TabsContext.Provider value={{tabs, switchTab}}> {children} </TabsContext.Provider>)
 }
 
-export { TabsContext, TabsProvider}
+const useTabs = () =>{
+    const context = useContext(TabsContext);
+    if (!context) {
+      throw new Error("useAuth must be used within AuthProvider");
+    }
+    return context;
+}
+export { TabsContext, TabsProvider, useTabs}

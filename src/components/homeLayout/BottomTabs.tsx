@@ -1,11 +1,9 @@
-import { useContext } from "react";
 import { Button } from "../ui/button";
-import { TabsContext } from "../../context/TabsContext";
+import { useTabs } from "../../context/TabsContext";
 
 export default function BottomTabs() {
-  const ctx = useContext(TabsContext);
-  if (!ctx) return null;
-  const {tabs, switchTab} = ctx;
+  
+  const {tabs, switchTab} = useTabs();
 
   return (
       <ul className="flex text-accent-foreground px-4 pt-1 pb-2">

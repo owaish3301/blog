@@ -1,18 +1,15 @@
-import { useContext } from "react";
 import { ScrollArea } from "../../components/ui/scroll-area";
 import NewPost from "../homePageContent/NewPost";
 import TrendingNow from "../homePageContent/TrendingNow";
 import WhoToFollow from "../homePageContent/WhoToFollow";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator"
-import { TabsContext } from "../../context/TabsContext";
+import { useTabs } from "../../context/TabsContext";
 
 export default function MainBody () {
 
-  const ctx = useContext(TabsContext);
-  if(!ctx) return null;
 
-  const {tabs, switchTab} = ctx;
+  const {tabs, switchTab} = useTabs();
 
   return (
     <div className="sm:flex h-full w-full">
