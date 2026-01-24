@@ -1,18 +1,25 @@
+import { useContext } from "react";
 import { ScrollArea } from "../../components/ui/scroll-area";
-import { tabItems } from "../../Constants/tabs"
 import NewPost from "../homePageContent/NewPost";
 import TrendingNow from "../homePageContent/TrendingNow";
 import WhoToFollow from "../homePageContent/WhoToFollow";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator"
+import { TabsContext } from "../../context/TabsContext";
 
 export default function MainBody () {
+
+  const ctx = useContext(TabsContext);
+  if(!ctx) return null;
+
+  const {tabs, switchTab} = ctx;
+
   return (
     <div className="sm:flex h-full w-full">
       <aside className="hidden sm:flex h-full">
         {/* left sidebar */}
         <ul className="flex flex-col gap-2 px-4 py-6">
-          {tabItems.map((item) => (
+          {tabs.map((item) => (
             <li key={item.name}>
               <div
                 className={`flex gap-4 p-2 ${
@@ -20,6 +27,7 @@ export default function MainBody () {
                 } ${item.customStyle ? item.customStyle : "rounded-xl"}`}
               >
                 <Button
+                  onClick={()=>switchTab(item.name)}
                   variant="ghost"
                   className={`w-full ${item.isDesktopOnly ? "hover:bg-slate-600 dark:hover:bg-sky-50 text-white dark:text-accent hover:text-white" : ""}`}
                 >

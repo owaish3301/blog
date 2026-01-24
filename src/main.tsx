@@ -5,13 +5,16 @@ import App from './App.tsx'
 
 import { ThemeProvider } from './theme/theme-provider.tsx'
 import { BrowserRouter } from 'react-router'
+import { TabsProvider } from './context/TabsContext.tsx'
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
+    <TabsProvider>
+      <BrowserRouter>
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <App />
+        </ThemeProvider>
+      </BrowserRouter>
+    </TabsProvider>
   </StrictMode>
 );
