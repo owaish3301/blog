@@ -1,5 +1,5 @@
-import type { FormEvent } from "react";
-import { Link } from "react-router";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
+import { Link, useNavigate } from "react-router";
 
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../../components/ui/button";
@@ -11,19 +11,79 @@ import {
   FieldSeparator,
 } from "../../components/ui/field";
 import { Input } from "../../components/ui/input";
+import { ZodError, type ZodIssue } from "zod";
+import { useAuth } from "../../context/AuthContext";
+import { emailSchema, passSchema } from "../../validations/authValidations";
+import { toast } from "sonner";
+
+interface AuthErrorType {
+  emailError: string | null | ZodError;
+  passwordError: string | null | ZodError;
+}
 
 export default function SignIn() {
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const [errors, setErrors] = useState<AuthErrorType>({
+    emailError: null,
+    passwordError: null,
+  });
+  const formatError = (err: string | null | ZodError | undefined) => {
+    if (!err) return null;
+    if (typeof err === "string") return err;
+    if (err instanceof ZodError) {
+      return err.issues.map((e: ZodIssue) => e.message).join(" ");
+    }
+    return String(err);
   };
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const navigate = useNavigate();
+  const { signin, session } = useAuth();
+
+  useEffect(() => {
+    if (session) {
+      navigate("/home");
+    }
+  }, [session, navigate]);
+
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    //clear errors
+    setErrors(() => ({ emailError: "", passwordError: "" }));
+
+    //validations
+
+    const emailCheck = emailSchema.safeParse(email);
+    const passwordCheck = passSchema.safeParse(password);
+
+    if (emailCheck.error) {
+      setErrors((prev) => ({ ...prev, emailError: emailCheck.error }));
+      return;
+    }
+    if (passwordCheck.error) {
+      setErrors((prev) => ({ ...prev, passwordError: passwordCheck.error }));
+      return;
+    }
+
+    //signup
+    const response = await signin({ email, password });
+    if (response.error) {
+      toast.error(response.error || "An unknown error occured");
+    }
+    if (response.success) {
+      toast.success("SignIn successful");
+      navigate("/home");
+    }
+  };
+
+  
   return (
     <div>
       <Card className="py-4 sm:py-6 gap-3 sm:gap-6">
         <CardHeader>
           <CardTitle>
-            <h1 className="text-2xl font-bold text-center">
-              Welcome back
-            </h1>
+            <h1 className="text-2xl font-bold text-center">Welcome back</h1>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -55,12 +115,36 @@ export default function SignIn() {
                   id="email"
                   type="email"
                   placeholder="johndoe@example.com"
+                  autoComplete="username"
+                  value={email}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    setEmail(e.target.value);
+                  }}
                   required
                 />
+                {formatError(errors.emailError) && (
+                  <FieldDescription className="text-sm text-red-600 mt-1">
+                    {formatError(errors.emailError)}
+                  </FieldDescription>
+                )}
 
                 <Field>
-                    <FieldLabel htmlFor="password">Password</FieldLabel>
-                    <Input id="password" type="password" required />
+                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <Input
+                    id="password"
+                    type="password"
+                    required
+                    autoComplete="new-password"
+                    value={password}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                  {formatError(errors.passwordError) && (
+                    <FieldDescription className="text-sm text-red-600 mt-1 sm:col-span-2">
+                      {formatError(errors.passwordError)}
+                    </FieldDescription>
+                  )}
                 </Field>
                 <Field>
                   <Button type="submit">Create Account</Button>

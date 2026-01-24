@@ -6,15 +6,20 @@ import App from './App.tsx'
 import { ThemeProvider } from './theme/theme-provider.tsx'
 import { BrowserRouter } from 'react-router'
 import { TabsProvider } from './context/TabsContext.tsx'
+import { AuthProvider } from './context/AuthContext.tsx'
+import { Toaster } from 'sonner'
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <TabsProvider>
-      <BrowserRouter>
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <App />
-        </ThemeProvider>
-      </BrowserRouter>
-    </TabsProvider>
-  </StrictMode>
+    <AuthProvider>
+      <TabsProvider>
+        <BrowserRouter>
+          <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            <Toaster />
+            <App />
+          </ThemeProvider>
+        </BrowserRouter>
+      </TabsProvider>
+    </AuthProvider>
+  </StrictMode>,
 );

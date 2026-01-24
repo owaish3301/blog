@@ -3,9 +3,14 @@ import { Input } from "../ui/input";
 
 import { useTheme } from "../../theme/theme-context";
 import { Button } from "../ui/button";
+import { useAuth } from "../../context/AuthContext";
+import { toast } from "sonner";
 
 export default function NavBar() {
     const { theme, setTheme } = useTheme();
+
+    const {signout} = useAuth();
+    //TODO:This is temprory 
   return (
     <nav className="p-4 flex justify-between items-center text-accent-foreground ">
       <Button variant="ghost" aria-label="Home">
@@ -36,7 +41,7 @@ export default function NavBar() {
         <Button size="icon" variant="secondary">
           <BellIcon className="cursor-pointer" />
         </Button>
-        <Button size="icon" variant="secondary">
+        <Button size="icon" variant="secondary" onClick={ async ()=>{ await signout(); toast.success("Sign out successfull")}}>
           <User className="cursor-pointer" />
           {/* TODO:Add dropdown */}
         </Button>
