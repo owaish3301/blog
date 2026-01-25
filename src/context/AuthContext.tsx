@@ -17,6 +17,7 @@ interface AuthContextType {
     password,
   }: authInputs) => Promise<{ success: boolean; error?: string }>;
   signout: () => Promise<{ success: boolean; error?: string }>;
+  continueWithGoogle: () => Promise<void>;
 }
 
 type authInputs = {
@@ -34,8 +35,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
-
-    // console.log(session);
 
     // Listen for auth changes
     const {
@@ -101,8 +100,24 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const continueWithGoogle = async () => {
+    try{
+      setLoading(true);
+      await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: "http://localhost:5173/home",
+        },
+      });
+    } catch (e){
+      console.log(e)
+    }finally{
+      setLoading(false);
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ loading, session, signup, signin, signout }}>
+    <AuthContext.Provider value={{ loading, session, signup, signin, signout, continueWithGoogle }}>
       {children}
     </AuthContext.Provider>
   );

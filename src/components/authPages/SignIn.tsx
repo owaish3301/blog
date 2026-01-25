@@ -39,7 +39,7 @@ export default function SignIn() {
   const [password, setPassword] = useState<string>("");
 
   const navigate = useNavigate();
-  const { signin, session } = useAuth();
+  const { signin, session, continueWithGoogle } = useAuth();
 
   useEffect(() => {
     if (session) {
@@ -94,6 +94,7 @@ export default function SignIn() {
                   variant={"secondary"}
                   type="button"
                   className="py-3 h-auto rounded"
+                  onClick={()=>{continueWithGoogle()}}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path

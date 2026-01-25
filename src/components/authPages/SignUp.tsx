@@ -37,7 +37,7 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const navigate = useNavigate();
-  const {signup, session} = useAuth();
+  const {signup, session, continueWithGoogle} = useAuth();
 
   useEffect(()=>{
     if(session){
@@ -99,6 +99,7 @@ export default function SignUp() {
                   variant={"secondary"}
                   type="button"
                   className="py-3 h-auto rounded"
+                  onClick={()=>{continueWithGoogle()}}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path
