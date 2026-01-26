@@ -12,28 +12,28 @@ export const tabItems: TabItemsTypes[] = [
   {
     name: "Home",
     icon: HomeIcon,
-    isActive: true,
+    navigateTo:"/home"
   },
   {
     name: "Trending",
     icon: TrendingUpIcon,
-    isActive: false,
+    navigateTo:"/trending"
   },
   {
     name: "Search",
     icon: SearchIcon,
-    isActive: false,
+    navigateTo:"/search"
   },
   {
     name: "Saved",
     icon: BookmarkIcon,
-    isActive: false,
+    navigateTo:"/saved"
   },
   {
     name: "Post",
     icon: SendIcon,
-    isActive: false,
     customStyle: `bg-slate-600 dark:bg-sky-50 rounded-full`,
     isDesktopOnly: true,
+    navigateTo: "/new-post"
   },
 ];
