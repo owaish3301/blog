@@ -39,14 +39,14 @@ export default function MainBody () {
 
       <main className="h-full w-full px-4 py-2 overflow-y-auto">
         <NewPost />
-        <div className="md:hidden pb-[100px]">
+        <div className="lg:hidden pb-[100px]">
           <WhoToFollow />
         </div>
       </main>
 
       <Separator orientation="vertical" />
 
-      <aside className="w-max h-full hidden md:block px-4 py-6">
+      <aside className="w-max h-full hidden lg:block px-4 py-6">
         {/* right sidebar */}
         <ScrollArea className="h-full">
           <TrendingNow />

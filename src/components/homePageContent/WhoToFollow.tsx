@@ -29,7 +29,7 @@ export default function WhoToFollow() {
       </CardHeader>
       <CardContent className="">
         {/* Mobile: Horizontal scroll */}
-        <div className="md:hidden overflow-x-auto scrollbar-hide">
+        <div className="lg:hidden overflow-x-auto scrollbar-hide">
           <ul className="flex gap-3 px-4 pb-4 w-max">
             {followSuggestion.map((item) => (
               <li
@@ -48,7 +48,7 @@ export default function WhoToFollow() {
         </div>
 
         {/* Desktop: Vertical list */}
-        <ul className="hidden md:block">
+        <ul className="hidden lg:block">
           {followSuggestion.map((item) => (
             <li
               key={item.userId}

@@ -7,10 +7,12 @@ import { useAuth } from "../../context/AuthContext";
 import { toast } from "sonner";
 
 export default function NavBar() {
-    const { theme, setTheme } = useTheme();
-
-    const {signout} = useAuth();
-    //TODO:This is temprory 
+  
+  const { theme, setTheme } = useTheme();
+  
+  const {signout, session, loading} = useAuth();
+  const displayDp = !!session && !loading;
+  
   return (
     <nav className="p-4 flex justify-between items-center text-accent-foreground ">
       <Button variant="ghost" aria-label="Home">
@@ -41,8 +43,19 @@ export default function NavBar() {
         <Button size="icon" variant="secondary">
           <BellIcon className="cursor-pointer" />
         </Button>
-        <Button size="icon" variant="secondary" onClick={ async ()=>{ await signout(); toast.success("Sign out successfull")}}>
-          <User className="cursor-pointer" />
+        <Button
+          size="icon"
+          variant="secondary"
+          onClick={async () => {
+            await signout();
+            toast.success("Sign out successfull");
+          }}
+        >
+          {displayDp ? (
+            <img src={session?.user.user_metadata.picture} loading="lazy" width={"36px"} height={"36px"} />
+          ) : (
+            <User className="cursor-pointer" />
+          )}
           {/* TODO:Add dropdown */}
         </Button>
       </div>

@@ -16,13 +16,16 @@ import { ZodError, type ZodIssue } from "zod";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "sonner";
 
-interface AuthErrorType{
-  emailError:string | null | ZodError;
+interface AuthErrorType {
+  emailError: string | null | ZodError;
   passwordError: string | null | ZodError;
 }
 
 export default function SignUp() {
-  const [errors, setErrors] = useState<AuthErrorType>({emailError:null, passwordError:null});
+  const [errors, setErrors] = useState<AuthErrorType>({
+    emailError: null,
+    passwordError: null,
+  });
   const formatError = (err: string | null | ZodError | undefined) => {
     if (!err) return null;
     if (typeof err === "string") return err;
@@ -31,51 +34,53 @@ export default function SignUp() {
     }
     return String(err);
   };
-  
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const navigate = useNavigate();
-  const {signup, session, continueWithGoogle} = useAuth();
+  const { signup, session, continueWithGoogle } = useAuth();
 
-  useEffect(()=>{
-    if(session){
-      navigate('/home');
+  useEffect(() => {
+    if (session) {
+      navigate("/home");
     }
-  },[session, navigate]);
-
+  }, [session, navigate]);
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     //clear errors
-    setErrors(()=>({emailError:"", passwordError:""}));
-    
+    setErrors(() => ({ emailError: "", passwordError: "" }));
+
     //validations
     if (password !== confirmPassword) {
-      setErrors((prev) => ({ ...prev, passwordError: "Passwords do not match" }));
+      setErrors((prev) => ({
+        ...prev,
+        passwordError: "Passwords do not match",
+      }));
       return;
     }
 
     const emailCheck = emailSchema.safeParse(email);
     const passwordCheck = passSchema.safeParse(password);
 
-    if(emailCheck.error){
-      setErrors((prev)=>({...prev, emailError:emailCheck.error}));
+    if (emailCheck.error) {
+      setErrors((prev) => ({ ...prev, emailError: emailCheck.error }));
       return;
-    };
-    if(passwordCheck.error){
-      setErrors((prev)=>({...prev,passwordError:passwordCheck.error}));
+    }
+    if (passwordCheck.error) {
+      setErrors((prev) => ({ ...prev, passwordError: passwordCheck.error }));
       return;
-    };
+    }
 
     //signup
-    const response = await signup({email, password});
-    if(response.error){
+    const response = await signup({ email, password });
+    if (response.error) {
       toast.error(response.error || "An unknown error occured");
     }
-    if(response.success){
+    if (response.success) {
       toast.success("Account creation successful");
       navigate("/home");
     }
@@ -99,7 +104,14 @@ export default function SignUp() {
                   variant={"secondary"}
                   type="button"
                   className="py-3 h-auto rounded"
-                  onClick={()=>{continueWithGoogle()}}
+                  onClick={async () => {
+                    const response = await continueWithGoogle();
+                    if (response.error) {
+                      toast.error(response.error);
+                    } else {
+                      toast.success("Account creation successful");
+                    }
+                  }}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path
@@ -121,7 +133,9 @@ export default function SignUp() {
                   id="email"
                   type="email"
                   value={email}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => { setEmail(e.target.value); }}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    setEmail(e.target.value);
+                  }}
                   placeholder="johndoe@example.com"
                   autoComplete="username"
                   required
@@ -140,7 +154,9 @@ export default function SignUp() {
                         id="password"
                         type="password"
                         value={password}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                          setPassword(e.target.value)
+                        }
                         autoComplete="new-password"
                         required
                       />
@@ -153,7 +169,9 @@ export default function SignUp() {
                         id="confirm-password"
                         type="password"
                         value={confirmPassword}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                          setConfirmPassword(e.target.value)
+                        }
                         autoComplete="new-password"
                         required
                       />
@@ -178,8 +196,9 @@ export default function SignUp() {
         </CardContent>
       </Card>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <Link to="#">Terms of Service</Link>{" "}
-        and <Link to="#">Privacy Policy</Link>.
+        By clicking continue, you agree to our{" "}
+        <Link to="#">Terms of Service</Link> and{" "}
+        <Link to="#">Privacy Policy</Link>.
       </FieldDescription>
     </div>
   );

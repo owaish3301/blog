@@ -17,7 +17,7 @@ interface AuthContextType {
     password,
   }: authInputs) => Promise<{ success: boolean; error?: string }>;
   signout: () => Promise<{ success: boolean; error?: string }>;
-  continueWithGoogle: () => Promise<void>;
+  continueWithGoogle: () => Promise<{ success: boolean, error?:string}>;
 }
 
 type authInputs = {
@@ -49,12 +49,17 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       setLoading(true);
 
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          data: {
+            full_name: email.split("@")[0], // Changed from 'name' to 'full_name'
+            picture:
+              "https://huwwbnuhlavruypjzftb.supabase.co/storage/v1/object/public/blogify/avatar.svg", // Changed from 'avatar_url' to 'picture'
+          },
+        },
       });
-
-      console.log(data);
 
       if (error) {
         return { success: false, error: error.message };
@@ -72,11 +77,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       setLoading(true);
 
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-      console.log(data);
+
       if (error) return { success: false, error: error.message };
       return { success: true };
     } catch {
@@ -103,14 +108,21 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const continueWithGoogle = async () => {
     try{
       setLoading(true);
-      await supabase.auth.signInWithOAuth({
+      const { error} = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
           redirectTo: "http://localhost:5173/home",
+          
         },
       });
-    } catch (e){
-      console.log(e)
+
+      if(error){
+        return { success: false, error:error.message};
+      }
+      return { success: true}
+
+    } catch{
+      return { success: false, error:"An unexpected error occured"};
     }finally{
       setLoading(false);
     }
