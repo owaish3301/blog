@@ -19,6 +19,7 @@ export default function NewPost() {
             <UserIcon />
           )}
         </div>
+        
         <div>
           <div></div>
           <div>

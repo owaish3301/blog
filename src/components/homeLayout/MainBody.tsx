@@ -1,5 +1,4 @@
 import { ScrollArea } from "../../components/ui/scroll-area";
-import NewPost from "../homePageContent/NewPost";
 import TrendingNow from "../homePageContent/TrendingNow";
 import WhoToFollow from "../homePageContent/WhoToFollow";
 import { Button } from "../ui/button";
@@ -7,7 +6,6 @@ import { Separator } from "../ui/separator"
 import { useTabs } from "../../context/TabsContext";
 
 export default function MainBody () {
-
 
   const {tabs, switchTab} = useTabs();
 
@@ -38,7 +36,6 @@ export default function MainBody () {
       </aside>
 
       <main className="h-full w-full px-4 py-2 overflow-y-auto">
-        <NewPost />
         <div className="lg:hidden pb-[100px]">
           <WhoToFollow />
         </div>
