@@ -12,17 +12,24 @@ export default function LeftSideBar() {
       <ul className="flex flex-col gap-2 px-4 py-6">
         {tabs.map((item) => (
           <li key={item.name}>
-            <div
-              className={`p-2 ${item.customStyle ? item.customStyle : ""}`}
-            >
+            <div className={`p-2 ${item.customStyle ? item.customStyle : ""}`}>
               <Button
                 onClick={() => switchTab(item.name)}
                 variant="ghost"
-                className={`w-full p-0 ${item.isDesktopOnly ? "hover:bg-slate-600 dark:hover:bg-sky-50 text-white dark:text-accent hover:text-white" : ""}`}
+                className={`w-full p-0 ${item.name=="Post" ? "hover:bg-slate-600 dark:hover:bg-sky-50 text-white dark:text-accent hover:text-white" : ""}`}
               >
                 <NavLink
                   to={item.navigateTo}
-                  className="flex justify-center items-center w-full h-full gap-1 p-2 rounded-lg"
+                  className={ ({ isActive } : {isActive:boolean}) =>{
+                    return (
+                      (isActive
+                        ? item.name == "Post"
+                          ? ""
+                          : "bg-accent"
+                        : "") +
+                      " flex justify-center items-center w-full h-full gap-1 p-2 rounded-lg"
+                    );
+                  }}
                 >
                   <item.icon /> <p>{item.name}</p>
                 </NavLink>
