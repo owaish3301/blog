@@ -6,7 +6,7 @@ import { Separator } from "../ui/separator"
 
 export default function MainBody () {
   return (
-    <div>
+    <div className="w-full h-full flex">
       
       <main className="h-full w-full px-4 py-2 overflow-y-auto">
         <div className="lg:hidden pb-[100px]">
