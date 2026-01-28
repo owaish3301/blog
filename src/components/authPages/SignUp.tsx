@@ -104,14 +104,7 @@ export default function SignUp() {
                   variant={"secondary"}
                   type="button"
                   className="py-3 h-auto rounded"
-                  onClick={async () => {
-                    const response = await continueWithGoogle();
-                    if (response.error) {
-                      toast.error(response.error);
-                    } else {
-                      toast.success("Account creation successful");
-                    }
-                  }}
+                  onClick={()=>{continueWithGoogle()}}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path

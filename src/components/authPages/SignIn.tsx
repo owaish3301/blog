@@ -148,7 +148,7 @@ export default function SignIn() {
                   )}
                 </Field>
                 <Field>
-                  <Button type="submit">Create Account</Button>
+                  <Button type="submit">Sign in</Button>
                 </Field>
 
                 <FieldDescription className="text-center">

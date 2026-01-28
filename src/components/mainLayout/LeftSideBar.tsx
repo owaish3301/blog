@@ -2,9 +2,12 @@ import { Button } from "../ui/button";
 import { NavLink } from "react-router";
 import { useTabs } from "../../context/TabsContext";
 import { Separator } from "../ui/separator";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "sonner";
 
 export default function LeftSideBar() {
   const { tabs, switchTab } = useTabs();
+  const {session} = useAuth();
 
   return (
     <aside className="hidden sm:flex h-full">
@@ -16,11 +19,17 @@ export default function LeftSideBar() {
               <Button
                 onClick={() => switchTab(item.name)}
                 variant="ghost"
-                className={`w-full p-0 ${item.name=="Post" ? "hover:bg-slate-600 dark:hover:bg-sky-50 text-white dark:text-accent hover:text-white" : ""}`}
+                className={`w-full p-0 ${item.name == "Post" ? "hover:bg-slate-600 dark:hover:bg-sky-50 text-white dark:text-accent hover:text-white" : ""}`}
               >
                 <NavLink
                   to={item.navigateTo}
-                  className={ ({ isActive } : {isActive:boolean}) =>{
+                  onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                    if (item.name == "Post" && !session) {
+                      e.preventDefault();
+                      toast.error("Please signin to create a post");
+                    }
+                  }}
+                  className={({ isActive }: { isActive: boolean }) => {
                     return (
                       (isActive
                         ? item.name == "Post"
