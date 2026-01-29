@@ -32,7 +32,7 @@ export default function MainBody() {
       </aside>
 
       {/* fab */}
-      <div className="fixed z-10 bottom-20 right-5">
+      <div className="sm:hidden fixed z-10 bottom-20 right-5">
         <Button
           variant="secondary"
           size={"icon"}

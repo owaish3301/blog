@@ -4,11 +4,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Send } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
+import axios, { type AxiosResponse } from "axios";
+
+interface apiResponseType{
+  message?:string;
+  error?:string;
+  code?:string
+}
 
 export default function NewPost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { session } = useAuth();
 
   const handleSubmit = async () => {
     if (!title.trim() || !content.trim()) {
@@ -17,9 +26,18 @@ export default function NewPost() {
 
     setIsSubmitting(true);
     try {
-      // TODO: Implement post submission to your backend
-      console.log("Submitting post:", { title, content });
-      // await supabase.from('posts').insert({ title, content })
+      setIsSubmitting(true);
+
+      const response:AxiosResponse<apiResponseType> = await axios.post(`${import.meta.env.VITE_API_URI}/posts`,{
+        title,
+        content
+      },{
+        headers:{Authorization:`bearer ${session?.access_token}`}
+      })
+
+      const {data} = response;
+      console.log(data);
+
     } catch (error) {
       console.error("Failed to create post:", error);
     } finally {
