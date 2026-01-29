@@ -1,14 +1,15 @@
-import { BellIcon, MoonIcon, SearchIcon, SunIcon, User } from "lucide-react";
+import { BellIcon, SearchIcon, User } from "lucide-react";
 import { Input } from "../ui/input";
 
 import { useTheme } from "../../theme/theme-context";
 import { Button } from "../ui/button";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "sonner";
+import Switch from "../ui/Switch";
 
 export default function NavBar() {
   
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   
   const {signout, session, loading} = useAuth();
   const displayDp = !!session && !loading;
@@ -30,7 +31,7 @@ export default function NavBar() {
       </div>
 
       <div className="flex gap-4 items-center">
-        <Button
+        {/* <Button
           size="icon"
           variant="secondary"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -39,7 +40,8 @@ export default function NavBar() {
           <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
-        </Button>
+        </Button> */}
+        <Switch onChange={(checked)=>{setTheme(checked?"light":"dark")}} />
         <Button size="icon" variant="secondary">
           <BellIcon className="cursor-pointer" />
         </Button>
